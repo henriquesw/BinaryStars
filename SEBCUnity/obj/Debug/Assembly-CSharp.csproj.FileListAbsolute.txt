@@ -1,0 +1,2 @@
+C:\Users\henri\OneDrive\Documentos\Unity\SEBCUnity\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
+C:\Users\henri\OneDrive\Documentos\Unity\SEBCUnity\obj\Debug\Assembly-CSharp.dll

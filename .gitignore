@@ -32,3 +32,11 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+*.log
+*.backup
+SEBCUnity/Temp/UnityLockfile
+SEBCUnity/Library/EditorInstance.json
+SEBCUnity/Library/CurrentMaximizeLayout.dwlt
+SEBCUnity/Library/CurrentMaximizeLayout.dwlt
+SEBCUnity/Library/CurrentMaximizeLayout.dwlt
+*.dwlt

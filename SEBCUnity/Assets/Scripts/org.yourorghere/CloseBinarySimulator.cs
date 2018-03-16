@@ -12,7 +12,6 @@ public class CloseBinarySimulator
     private bool axes;
     private bool labels;
     private bool orbit;
-    //private bool clockWise;
 
     public BinarySystemData data;
     private Table table;
@@ -88,7 +87,7 @@ public class CloseBinarySimulator
         obj = new GameObject(name);
         obj.AddComponent<MeshFilter>();
         obj.AddComponent<MeshRenderer>();
-        obj.GetComponent<MeshRenderer>().material = new Material(GameObject.Find("EventSystem").GetComponent<UserWindow>().shader);
+		obj.GetComponent<MeshRenderer>().material = new Material(Shader.Find ("Vertex color unlit"));
         obj.transform.parent = GameObject.Find(parent).transform;
 
         return obj;

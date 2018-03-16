@@ -1,0 +1,16 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj" RefactoringSettings.EnableRefactorings="True">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/org.yourorghere/UserWindow.cs">
+    <Files>
+      <File FileName="Assets/Scripts/org.yourorghere/UserWindow.cs" Line="158" Column="27" />
+      <File FileName="Assets/Scripts/org.yourorghere/BinarySystemData.cs" Line="28" Column="2" />
+      <File FileName="Assets/Scripts/org.yourorghere/CloseBinarySimulator.cs" Line="91" Column="36" />
+      <File FileName="Assets/Scripts/org.yourorghere/Table.cs" Line="37" Column="30" />
+      <File FileName="Assets/Scripts/RazaoMassas.cs" Line="26" Column="10" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

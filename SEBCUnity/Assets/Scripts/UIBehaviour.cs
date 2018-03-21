@@ -47,7 +47,7 @@ public class UIBehaviour : MonoBehaviour {
 	{
 		optionWindowStats = !optionWindowStats;
 		optionWindow.SetActive (optionWindowStats);
-	}
+    }
 
 	public void SetHelpWindow () 
 	{
@@ -115,15 +115,15 @@ public class UIBehaviour : MonoBehaviour {
 		GameObject text;
 
 		text = GameObject.Find ("L1Text");
-		text.transform.position = GameObject.Find("L1").transform.position;
+		text.transform.localPosition = -GameObject.Find("L1").transform.position;
 		text.transform.rotation = Camera.main.transform.rotation;
 
 		text = GameObject.Find ("L2Text");
-		text.transform.position = GameObject.Find("L2").transform.position;
+		text.transform.localPosition = -GameObject.Find("L2").transform.position;
 		text.transform.rotation = Camera.main.transform.rotation;
 
 		text = GameObject.Find ("L3Text");
-		text.transform.position = GameObject.Find("L3").transform.position;
+		text.transform.localPosition = -GameObject.Find("L3").transform.position;
 		text.transform.rotation = Camera.main.transform.rotation;
 
 		text = GameObject.Find ("PrimaryText");

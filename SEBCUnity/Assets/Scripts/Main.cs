@@ -24,11 +24,6 @@ public class Main : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if (screen.getOrbit())
-		{
-			GameObject.Find("White Dwarf").transform.RotateAround(Vector3.zero, Vector3.down, 40 * Time.deltaTime);
-			GameObject.Find("Red Giant").transform.RotateAround(Vector3.zero, Vector3.down, 40 * Time.deltaTime);
-		}
 
 		if (screen.getParticles())
 		{
@@ -38,16 +33,29 @@ public class Main : MonoBehaviour {
 
 		if (screen.getLabels ())
 		{
-			canvas.GetComponent<UIBehaviour> ().setLabel (screen.getRocheLobule ());
+			canvas.GetComponent<UIBehaviour> ().setLabel (screen.getRocheLobule());
 		}
-			
-	}
+
+        if (screen.getOrbit())
+        {
+            rotateObjects();
+        }
+
+    }
 
 	private void updateScreen()
 	{
 		int indice = (int)(mass - 10) / 2;
 		screen.setSystem(indice, countParticles, sliderPrimaryTemp, sliderSecondaryTemp);
 	}
+
+    private void rotateObjects ()
+    {
+        float time = Time.deltaTime;
+        GameObject.Find("White Dwarf").transform.RotateAround(Vector3.zero, Vector3.down, 40 * time);
+        GameObject.Find("Red Giant").transform.RotateAround(Vector3.zero, Vector3.down, 40 * time);
+        GameObject.Find("WorldCanvas").transform.RotateAround(Vector3.zero, Vector3.down, 40 * time);
+    }
 
 	private IEnumerator showLightCurves()
 	{

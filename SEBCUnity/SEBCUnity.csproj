@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\AboutWindow.cs" />
+    <Compile Include="Assets\Scripts\CameraBehaviour.cs" />
     <Compile Include="Assets\Scripts\EmailWindow.cs" />
     <Compile Include="Assets\Scripts\Equation\Derivatives.cs" />
     <Compile Include="Assets\Scripts\Equation\Equation.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Assets\Scripts\Lightcurve\Mode2.cs" />
     <Compile Include="Assets\Scripts\Lightcurve\Mode3.cs" />
     <Compile Include="Assets\Scripts\LightCurveWindow.cs" />
+    <Compile Include="Assets\Scripts\Main.cs" />
     <Compile Include="Assets\Scripts\org.yourorghere\BinarySystemData.cs" />
     <Compile Include="Assets\Scripts\org.yourorghere\CloseBinarySimulator.cs" />
     <Compile Include="Assets\Scripts\org.yourorghere\LightCurveGenerator.cs" />
@@ -109,11 +111,13 @@
     <Compile Include="Assets\Scripts\org.yourorghere\ThreeBodyStart.cs" />
     <Compile Include="Assets\Scripts\ProgressDialog.cs" />
     <Compile Include="Assets\Scripts\RotateObject.cs" />
+    <Compile Include="Assets\Scripts\SliceScene\MeshGenerator.cs" />
     <Compile Include="Assets\Scripts\Temperature\Temperature.cs" />
     <Compile Include="Assets\Scripts\Temperature\Temperature1.cs" />
     <Compile Include="Assets\Scripts\Temperature\Temperature2.cs" />
     <Compile Include="Assets\Scripts\Temperature\Temperature3.cs" />
     <Compile Include="Assets\Scripts\Temperature\TemperatureStar.cs" />
+    <Compile Include="Assets\Scripts\UIBehaviour.cs" />
     <Compile Include="Assets\Scripts\UserWindow.cs" />
   </ItemGroup>
   <ItemGroup>

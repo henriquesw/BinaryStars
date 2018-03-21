@@ -96,13 +96,13 @@ public class CloseBinarySimulator
     private void instanciateLagrangePoints()
     {
         L1.transform.position = new Vector3(data.getL1(), 0, 0);
-        L1.transform.parent = GameObject.Find("White Dwarf").transform;
+        L1.transform.parent = GameObject.Find("LagrangePoints").transform;
 
         L2.transform.position = new Vector3(data.getL2(), 0, 0);
-        L2.transform.parent = GameObject.Find("White Dwarf").transform;
+        L2.transform.parent = GameObject.Find("LagrangePoints").transform;
 
         L3.transform.position = new Vector3(data.getL3(), 0, 0);
-        L3.transform.parent = GameObject.Find("White Dwarf").transform;
+        L3.transform.parent = GameObject.Find("LagrangePoints").transform;
     }
 
     private void hideObjects()

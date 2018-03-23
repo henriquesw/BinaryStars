@@ -7,22 +7,123 @@ public class Equation : MonoBehaviour {
     public float xStart;
     public float yStart;
     public float mass;
+    public int curve;
+    public float dxStart;
+    public float dyStart;
     private Derivatives derivatives;
     private Potential potential;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start() {
         derivatives = new Derivatives(mass);
         potential = new Potential();
-		pointsMath();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        pointsMath();
+    }
 
-	}
+    // Update is called once per frame
+    void Update() {
 
-	private void pointsMath ()
+    }
+
+    private void pointsMath()
+    {
+        int controle0 = 0;
+        while (controle0 == 0)
+        {
+            float x = 0;
+            float y = 0;
+            float dx = 0;
+            float dy = 0;
+            float k = 0;
+            float V = 0;
+            float x12 = 0;
+            float y12 = 0;
+
+            x = xStart;
+            y = yStart;
+            k = potential.getPotential(x, y, mass);
+
+            int controle1 = 1;
+            while (controle1 == 1)
+            {
+                if (curve == 1)
+                    dx = dxStart;
+                else
+                    dy = dyStart;
+
+                if (curve == 1)
+                {
+                    int controle2 = 2;
+                    while (controle2 == 2)
+                    {
+                        x12 = x + 0.5f * dx;
+                        y12 = y - 0.5f * dx * derivatives.derivativeX(x, y) / derivatives.derivativeY(x, y);
+                        x = x + dx;
+
+                        dy = Mathf.Abs(-dx * derivatives.derivativeX(x12, y12) / derivatives.derivativeY(x12, y12));
+
+                        V = potential.getPotential(x, y, mass);
+
+                        if (Mathf.Abs(dx) >= dy)
+                            controle2 = 2;
+                        else
+                        {
+                            controle2 = 3;
+                            break;
+                        }
+
+                        y = y - dx * derivatives.derivativeX(x12, y12) / derivatives.derivativeY(x12, y12);
+
+                        y = y - (potential.getPotential(x, y, mass) - k) / derivatives.derivativeY(x, y);
+
+                        dy = Mathf.Abs(-dx * derivatives.derivativeX(x12, y12) / derivatives.derivativeY(x12, y12));
+                    }
+                }
+                else
+                {
+                    int controle3 = 3;
+                    while (controle3 == 3)
+                    {
+                        y12 = y + 0.5f * dy;
+                        x12 = x - 0.5f * dy* derivatives.derivativeY(x, y) / derivatives.derivativeX(x, y);
+
+                        dx = Mathf.Abs(-dy* derivatives.derivativeY(x12, y12) / derivatives.derivativeX(x12, y12));
+
+                        V = potential.getPotential(x, y, mass);
+
+                        if (Mathf.Abs(dy) >= dx)
+                            controle3 = 3;
+                        else
+                        {
+                            controle3 = 2;
+                            break;
+                        }
+                        y = y + dy;
+                        x = x - dy* derivatives.derivativeY(x12, y12) / derivatives.derivativeX(x12, y12);
+
+                        x = x - ((potential.getPotential(x, y, mass) - k) / derivatives.derivativeX(x, y));
+                        
+                    }
+                }
+                controle1 = 0;
+
+                if (controle1 == 1)
+                {
+                    if (curve == 1)
+                        curve = 2;
+                    else
+                        curve = 1;
+                }
+                if (controle1 == 1)
+                    controle0 = 1;
+                else
+                    controle0 = 0;
+                controle0 = 0;
+            }
+        }
+    }
+
+    /*private void pointsMath ()
     {
         float k = potential.getPotential(mass, xStart, yStart);
 
@@ -128,5 +229,7 @@ public class Equation : MonoBehaviour {
             }
             count++;
         }
-    }
+    }*/
+
+
 }

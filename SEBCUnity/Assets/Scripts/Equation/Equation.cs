@@ -29,30 +29,30 @@ public class Equation : MonoBehaviour {
         float x = xStart;
         float y = yStart;
         int curve = 1;
-        int controle1 = 1;
-		int controle2;
-		int controle3;
+        int control1 = 1;
+		int control2;
+		int control3;
 		int count = 0;
 		float dx = 0, dy = 0;
         float x12;
         float y12;
         float V;
 
-        while (controle1 == 1 && count < 10)
+        while (control1 == 1 && count < 10)
         {
             if (curve == 1)
             {
-                dx = 0.1f;
+                dx = -0.05f;
             }
             else
             {
-                dy = 0.1f;
+                dy = 0.05f;
             }
 
             if (curve == 1)
             {
-                controle2 = 2;
-                while (controle2 == 2)
+                control2 = 2;
+                while (control2 == 2)
                 {
 
                     x12 = x + 0.5f * dx;
@@ -65,11 +65,11 @@ public class Equation : MonoBehaviour {
 
                     if (Mathf.Abs(dx) >= dy)
                     {
-                        controle2 = 2;
+                        control2 = 2;
                     }
                     else
                     {
-                        controle2 = 3;
+                        control2 = 3;
                         break;
                     }
 
@@ -79,13 +79,13 @@ public class Equation : MonoBehaviour {
 
                     dy = Mathf.Abs(-dx * derivatives.derivativeX(x12, y12) / derivatives.derivativeY(x12, y12));
 
-					//Debug.Log(x + " " + y);
+					Debug.Log(x + " " + y);
                 }
             }
             else
             {
-                controle3 = 3;
-                while (controle3 == 3)
+                control3 = 3;
+                while (control3 == 3)
                 {
                     y12 = y + 0.5f * dy;
                     x12 = x - 0.5f * dy * derivatives.derivativeX(x, y) / derivatives.derivativeY(x, y);
@@ -96,11 +96,11 @@ public class Equation : MonoBehaviour {
 
                     if (Mathf.Abs(dy) >= dx)
                     {
-                        controle3 = 3;
+                        control3 = 3;
                     }
                     else
                     {
-                        controle3 = 2;
+                        control3 = 2;
                         break;
                     }
 
@@ -109,13 +109,13 @@ public class Equation : MonoBehaviour {
 
                     x = x - (potential.getPotential(mass, x, y) - k) / derivatives.derivativeX(x, y);
 
-					//Debug.Log(x + " " + y);
+					Debug.Log(x + " " + y);
                 }
             }
 
-            controle1 = 1;
+            control1 = 1;
 
-            if (controle1 == 1)
+            if (control1 == 1)
             {
                 if (curve == 1)
                 {

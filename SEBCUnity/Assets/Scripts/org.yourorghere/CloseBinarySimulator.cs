@@ -3,17 +3,6 @@ using System;
 
 public class CloseBinarySimulator
 {
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     private float primaryTemp;
     private float secondaryTemp;
@@ -23,7 +12,6 @@ public class CloseBinarySimulator
     private bool axes;
     private bool labels;
     private bool orbit;
-    //private bool clockWise;
 
     public BinarySystemData data;
     private Table table;
@@ -99,7 +87,7 @@ public class CloseBinarySimulator
         obj = new GameObject(name);
         obj.AddComponent<MeshFilter>();
         obj.AddComponent<MeshRenderer>();
-        obj.GetComponent<MeshRenderer>().material = new Material(GameObject.Find("EventSystem").GetComponent<UserWindow>().shader);
+		obj.GetComponent<MeshRenderer>().material = new Material(Shader.Find ("Vertex color unlit"));
         obj.transform.parent = GameObject.Find(parent).transform;
 
         return obj;
@@ -108,13 +96,13 @@ public class CloseBinarySimulator
     private void instanciateLagrangePoints()
     {
         L1.transform.position = new Vector3(data.getL1(), 0, 0);
-        L1.transform.parent = GameObject.Find("White Dwarf").transform;
+        L1.transform.parent = GameObject.Find("LagrangePoints").transform;
 
         L2.transform.position = new Vector3(data.getL2(), 0, 0);
-        L2.transform.parent = GameObject.Find("White Dwarf").transform;
+        L2.transform.parent = GameObject.Find("LagrangePoints").transform;
 
         L3.transform.position = new Vector3(data.getL3(), 0, 0);
-        L3.transform.parent = GameObject.Find("White Dwarf").transform;
+        L3.transform.parent = GameObject.Find("LagrangePoints").transform;
     }
 
     private void hideObjects()

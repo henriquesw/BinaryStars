@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEBCUnity", "SEBCUnity.csproj", "{C6218DB5-C162-AE06-2798-D216E3ECA2F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEBCUnity.Plugins", "SEBCUnity.Plugins.csproj", "{04C486FA-D436-FDC6-59F1-EF671AC8C69D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEBCUnity.Editor", "SEBCUnity.Editor.csproj", "{591485F2-4516-E1B0-B812-52A73D50B294}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C6218DB5-C162-AE06-2798-D216E3ECA2F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6218DB5-C162-AE06-2798-D216E3ECA2F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6218DB5-C162-AE06-2798-D216E3ECA2F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6218DB5-C162-AE06-2798-D216E3ECA2F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04C486FA-D436-FDC6-59F1-EF671AC8C69D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04C486FA-D436-FDC6-59F1-EF671AC8C69D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04C486FA-D436-FDC6-59F1-EF671AC8C69D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04C486FA-D436-FDC6-59F1-EF671AC8C69D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{591485F2-4516-E1B0-B812-52A73D50B294}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{591485F2-4516-E1B0-B812-52A73D50B294}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{591485F2-4516-E1B0-B812-52A73D50B294}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{591485F2-4516-E1B0-B812-52A73D50B294}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

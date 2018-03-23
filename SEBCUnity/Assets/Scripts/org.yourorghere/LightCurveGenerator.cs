@@ -41,7 +41,7 @@ public class LightCurveGenerator
         geometry = new Geometry(KFLAG, 5, angle, 0.00001, m, t1p, t2p, -0.237, 1.016, 0.676, 0.08, 14.07);
         geometry.calculateGeometry();
 
-        GameObject.Find("EventSystem").GetComponent<ProgressDialog>().progress = 1;
+        //GameObject.Find("EventSystem").GetComponent<ProgressDialog>().progress = 1;
         yield return null;
 
         //System.out.println(t1p +" " + t2p);
@@ -61,7 +61,7 @@ public class LightCurveGenerator
         temperature.setSecondaryPoints(geometry.getSecondary().getPontos());
         temperature.runTemperature();
 
-        GameObject.Find("EventSystem").GetComponent<ProgressDialog>().progress = 2;
+        //GameObject.Find("EventSystem").GetComponent<ProgressDialog>().progress = 2;
         yield return null;
 
         if (KFLAG == 1)
@@ -83,7 +83,7 @@ public class LightCurveGenerator
         lc.setSecondaryTemperature(temperature.secondary.TF);
         lc.runLightCurve();
 
-        GameObject.Find("EventSystem").GetComponent<ProgressDialog>().progress = 3;
+        //GameObject.Find("EventSystem").GetComponent<ProgressDialog>().progress = 3;
         yield return null;
     }
 

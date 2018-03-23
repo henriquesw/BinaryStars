@@ -2502,6 +2502,9 @@ MonoBehaviour:
   xStart: 1.05
   yStart: 0
   mass: 0.4
+  curve: 2
+  dxStart: -0.05
+  dyStart: 0.05
 --- !u!4 &504038695
 Transform:
   m_ObjectHideFlags: 0

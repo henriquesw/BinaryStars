@@ -7,6 +7,7 @@ public class Main : MonoBehaviour {
 
 	public float mass;
 	public GameObject canvas;
+    public GameObject worldCanvas;
 
 	private CloseBinarySimulator screen;
 	private int countParticles;
@@ -54,7 +55,7 @@ public class Main : MonoBehaviour {
         float time = Time.deltaTime;
         GameObject.Find("White Dwarf").transform.RotateAround(Vector3.zero, Vector3.down, 40 * time);
         GameObject.Find("Red Giant").transform.RotateAround(Vector3.zero, Vector3.down, 40 * time);
-        GameObject.Find("WorldCanvas").transform.RotateAround(Vector3.zero, Vector3.down, 40 * time);
+        worldCanvas.transform.RotateAround(Vector3.zero, Vector3.down, 40 * time);
     }
 
 	private IEnumerator showLightCurves()

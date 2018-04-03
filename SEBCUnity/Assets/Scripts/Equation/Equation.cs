@@ -10,19 +10,22 @@ public class Equation : MonoBehaviour {
     public int curve;
     public float dxStart;
     public float dyStart;
+
     private Derivatives derivatives;
     private Potential potential;
+    private bool points = true;
 
     // Use this for initialization
     void Start() {
         derivatives = new Derivatives(mass);
         potential = new Potential();
-        pointsMath();
+        
     }
 
     // Update is called once per frame
     void Update() {
-
+        if (points)
+            pointsMath();
     }
 
     private void pointsMath()
@@ -42,6 +45,8 @@ public class Equation : MonoBehaviour {
             x = xStart;
             y = yStart;
             k = potential.getPotential(x, y, mass);
+            //k = 1.716751166f;
+            Debug.Log(k);
 
             int controle1 = 1;
             while (controle1 == 1)
@@ -64,6 +69,8 @@ public class Equation : MonoBehaviour {
 
                         V = potential.getPotential(x, y, mass);
 
+                        Debug.Log("(" + x + ", " + y + ", " + V + ", " + dx + ", " + dy + ")");
+
                         if (Mathf.Abs(dx) >= dy)
                             controle2 = 2;
                         else
@@ -77,6 +84,7 @@ public class Equation : MonoBehaviour {
                         y = y - (potential.getPotential(x, y, mass) - k) / derivatives.derivativeY(x, y);
 
                         dy = Mathf.Abs(-dx * derivatives.derivativeX(x12, y12) / derivatives.derivativeY(x12, y12));
+                        Debug.Log("(x,y)=(" + x + "," + y + ")");
                     }
                 }
                 else
@@ -91,6 +99,8 @@ public class Equation : MonoBehaviour {
 
                         V = potential.getPotential(x, y, mass);
 
+                        Debug.Log("(x,y,V,dx,dy)=(" + x + ", " + y + ", " + V + ", " + dx + ", " + dy + ")");
+
                         if (Mathf.Abs(dy) >= dx)
                             controle3 = 3;
                         else
@@ -102,11 +112,10 @@ public class Equation : MonoBehaviour {
                         x = x - dy* derivatives.derivativeY(x12, y12) / derivatives.derivativeX(x12, y12);
 
                         x = x - ((potential.getPotential(x, y, mass) - k) / derivatives.derivativeX(x, y));
-                        
+                        Debug.Log("(x,y)=(" + x + "," + y + ")");
                     }
                 }
                 controle1 = 0;
-
                 if (controle1 == 1)
                 {
                     if (curve == 1)
@@ -117,8 +126,8 @@ public class Equation : MonoBehaviour {
                 if (controle1 == 1)
                     controle0 = 1;
                 else
-                    controle0 = 0;
-                controle0 = 0;
+                    controle0 =  2;
+                points = false;
             }
         }
     }
@@ -230,6 +239,4 @@ public class Equation : MonoBehaviour {
             count++;
         }
     }*/
-
-
 }

@@ -13,7 +13,8 @@ public class Temperature3 : Temperature {
 	}
 
 	protected double TDOUT, UDK, NRDK, NADK, RIN, ROUT, FACTOR, DRDK, DRDK2, DADK, R1, UDK3;
-	protected double [] RDK, TDK, SN1, ZW;
+    protected double[] RDK, TDK, SN1;
+    protected new double[] ZW;
 	protected double [,] XDK, YDK, DT22;
 
 	public Temperature3(double r01, double T1P, double T2P, double U1, double U2, double AB1, double AB2, double tdout, double udk, double BETA, int NTH1, int NPH1, int NTH2, int NPH2, double NRDK, double NADK, double RIN, double ROUT, double FACTOR) :
@@ -39,7 +40,7 @@ public class Temperature3 : Temperature {
 		this.ROUT = ROUT;
 		this.FACTOR = FACTOR;
 
-		this.initializeVectorandMatrix();
+		this.InitializeVectorandMatrix();
 	}
 
 	public Temperature3(TemperatureStar star1, TemperatureStar star2, double tdout, double udk, double BETA, double NRDK, double NADK, double RIN, double ROUT, double FACTOR) :
@@ -55,7 +56,7 @@ public class Temperature3 : Temperature {
 		this.ROUT = ROUT;
 		this.FACTOR = FACTOR;
 
-		this.initializeVectorandMatrix();
+		this.InitializeVectorandMatrix();
 	}
 
 	public override void runTemperature() {
@@ -237,7 +238,7 @@ public class Temperature3 : Temperature {
 		return t;
 	}
 
-	private void initializeVectorandMatrix() {
+	private void InitializeVectorandMatrix() {
 		this.RDK = new double[52];
 		this.TDK = new double[52];
 		this.XDK = new double[51,52];

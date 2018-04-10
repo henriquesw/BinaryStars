@@ -5,7 +5,7 @@ using System;
 
 public class LagrangePoints {
 
-	private Point[] points;
+	private Point[] points = null;
 	private float mass;
 
 	public LagrangePoints (float mass)
@@ -41,11 +41,11 @@ public class LagrangePoints {
 		while (delta >= 1e-15)
         {
 			g = l1;
-			l1 = (float) ((g) - ((-h1 * ((1 - mass) / (Mathf.Pow(g - mass, 2))) - h2 * ((mass) / (Mathf.Pow(g + 1 - mass, 2))) + g) / (2 * h1 * ((1 - mass) / (Mathf.Pow(g - mass, 3))) + 2 * h2 * ((mass) / (Mathf.Pow(g + 1 - mass, 3))) + 1)));
+			l1 = ((g) - ((-h1 * ((1 - mass) / (Mathf.Pow(g - mass, 2))) - h2 * ((mass) / (Mathf.Pow(g + 1 - mass, 2))) + g) / (2 * h1 * ((1 - mass) / (Mathf.Pow(g - mass, 3))) + 2 * h2 * ((mass) / (Mathf.Pow(g + 1 - mass, 3))) + 1)));
 			delta = Mathf.Abs (g - l1);
 		}
 		
-		points [0] = new Point ((float) l1, 0);
+		points [0] = new Point (l1, 0);
 
     }
 
@@ -72,11 +72,11 @@ public class LagrangePoints {
 		while (delta >= 1e-15)
         {
 			g = l2;
-			l2 = (float) ((g) - (( -h1*((1-mass)/(Mathf.Pow((g-mass),2)))-h2*((mass)/(Mathf.Pow((g+1-mass),2)))+g)/(2*h1*((1-mass)/(Mathf.Pow((g-mass),3)))+2*h2*((mass)/(Mathf.Pow((g+1-mass),3)))+1)));
+			l2 = ((g) - (( -h1*((1-mass)/(Mathf.Pow((g-mass),2)))-h2*((mass)/(Mathf.Pow((g+1-mass),2)))+g)/(2*h1*((1-mass)/(Mathf.Pow((g-mass),3)))+2*h2*((mass)/(Mathf.Pow((g+1-mass),3)))+1)));
 			delta = Mathf.Abs (g - l2);
 		}
 
-		points [1] = new Point ((float) l2, 0);
+		points [1] = new Point (l2, 0);
 	}
 
 	private void L3 ()
@@ -102,17 +102,17 @@ public class LagrangePoints {
 		while (delta >= 1e-15)
         {
 			g = l3;
-			l3 = (float) ((g) - ((-h1 * ((1 - mass) / (Mathf.Pow((g - mass), 2))) - h2 * (mass / (Mathf.Pow((g + 1 - mass), 2))) + g) / (2 * h1 * ((1 - mass) / (Mathf.Pow((g - mass), 3))) + 2 * h2 * (mass / (Mathf.Pow((g + 1 - mass), 3))) + 1)));
+			l3 = ((g) - ((-h1 * ((1 - mass) / (Mathf.Pow((g - mass), 2))) - h2 * (mass / (Mathf.Pow((g + 1 - mass), 2))) + g) / (2 * h1 * ((1 - mass) / (Mathf.Pow((g - mass), 3))) + 2 * h2 * (mass / (Mathf.Pow((g + 1 - mass), 3))) + 1)));
 			delta = Mathf.Abs (g - l3);
 		}
 
-		points [2] = new Point ((float) l3, 0);
+		points [2] = new Point (l3, 0);
 	}
 
 	private void L4 ()
     {
 		float l4_x = (float) (mass - 0.5);
-		float l4_y = (float) Mathf.Sin (60);
+		float l4_y = Mathf.Sin (60);
 
 		points [3] = new Point (l4_x, l4_y);
 	}
@@ -120,7 +120,7 @@ public class LagrangePoints {
 	private void L5 ()
     {
 		float l5_x = (float) (mass - 0.5);
-		float l5_y = (float) -Mathf.Sin (60);
+		float l5_y = -Mathf.Sin (60);
 
 		points [4] = new Point (l5_x, l5_y);
 	}

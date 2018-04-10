@@ -14,12 +14,8 @@ public class LightCurveWindow : MonoBehaviour
 
     public static RawImage lighCurvesRawImage;
 
-    private GUIStyle styleLabel = new GUIStyle();
-
     private double biggestValue = 0;
     private double smallestValue = double.PositiveInfinity;
-
-    private bool isGraphicOn = false;
 
     private Button mailButton;
     private Button closeButton;

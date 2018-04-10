@@ -7,236 +7,212 @@ public class Equation : MonoBehaviour {
     public float xStart;
     public float yStart;
     public float mass;
-    public int curve;
     public float dxStart;
     public float dyStart;
+
+    public bool curve;
 
     private Derivatives derivatives;
     private Potential potential;
     private bool points = true;
+    private bool controle1;
 
     // Use this for initialization
     void Start() {
-        derivatives = new Derivatives(mass);
+        derivatives = new Derivatives();
         potential = new Potential();
-        
     }
 
     // Update is called once per frame
     void Update() {
         if (points)
-            pointsMath();
-    }
-
-    private void pointsMath()
-    {
-        int controle0 = 0;
-        while (controle0 == 0)
         {
-            float x = 0;
-            float y = 0;
-            float dx = 0;
-            float dy = 0;
-            float k = 0;
-            float V = 0;
-            float x12 = 0;
-            float y12 = 0;
-
-            x = xStart;
-            y = yStart;
-            k = potential.getPotential(x, y, mass);
-            //k = 1.716751166f;
-            Debug.Log(k);
-
-            int controle1 = 1;
-            while (controle1 == 1)
-            {
-                if (curve == 1)
-                    dx = dxStart;
-                else
-                    dy = dyStart;
-
-                if (curve == 1)
-                {
-                    int controle2 = 2;
-                    while (controle2 == 2)
-                    {
-                        x12 = x + 0.5f * dx;
-                        y12 = y - 0.5f * dx * derivatives.derivativeX(x, y) / derivatives.derivativeY(x, y);
-                        x = x + dx;
-
-                        dy = Mathf.Abs(-dx * derivatives.derivativeX(x12, y12) / derivatives.derivativeY(x12, y12));
-
-                        V = potential.getPotential(x, y, mass);
-
-                        Debug.Log("(" + x + ", " + y + ", " + V + ", " + dx + ", " + dy + ")");
-
-                        if (Mathf.Abs(dx) >= dy)
-                            controle2 = 2;
-                        else
-                        {
-                            controle2 = 3;
-                            break;
-                        }
-
-                        y = y - dx * derivatives.derivativeX(x12, y12) / derivatives.derivativeY(x12, y12);
-
-                        y = y - (potential.getPotential(x, y, mass) - k) / derivatives.derivativeY(x, y);
-
-                        dy = Mathf.Abs(-dx * derivatives.derivativeX(x12, y12) / derivatives.derivativeY(x12, y12));
-                        Debug.Log("(x,y)=(" + x + "," + y + ")");
-                    }
-                }
-                else
-                {
-                    int controle3 = 3;
-                    while (controle3 == 3)
-                    {
-                        y12 = y + 0.5f * dy;
-                        x12 = x - 0.5f * dy* derivatives.derivativeY(x, y) / derivatives.derivativeX(x, y);
-
-                        dx = Mathf.Abs(-dy* derivatives.derivativeY(x12, y12) / derivatives.derivativeX(x12, y12));
-
-                        V = potential.getPotential(x, y, mass);
-
-                        Debug.Log("(x,y,V,dx,dy)=(" + x + ", " + y + ", " + V + ", " + dx + ", " + dy + ")");
-
-                        if (Mathf.Abs(dy) >= dx)
-                            controle3 = 3;
-                        else
-                        {
-                            controle3 = 2;
-                            break;
-                        }
-                        y = y + dy;
-                        x = x - dy* derivatives.derivativeY(x12, y12) / derivatives.derivativeX(x12, y12);
-
-                        x = x - ((potential.getPotential(x, y, mass) - k) / derivatives.derivativeX(x, y));
-                        Debug.Log("(x,y)=(" + x + "," + y + ")");
-                    }
-                }
-                controle1 = 0;
-                if (controle1 == 1)
-                {
-                    if (curve == 1)
-                        curve = 2;
-                    else
-                        curve = 1;
-                }
-                if (controle1 == 1)
-                    controle0 = 1;
-                else
-                    controle0 =  2;
-                points = false;
-            }
+            //pointsMath(xStart, yStart, dxStart, dyStart, mass);
         }
     }
 
-    /*private void pointsMath ()
+    public List<Vector3> pointsMath(float x, float y, float dx, float dy, float mass)
     {
-        float k = potential.getPotential(mass, xStart, yStart);
-
-        float x = xStart;
-        float y = yStart;
-        int curve = 1;
-        int control1 = 1;
-		int control2;
-		int control3;
-		int count = 0;
-		float dx = 0, dy = 0;
-        float x12;
-        float y12;
-        float V;
-
-        while (control1 == 1 && count < 10)
+        List<Vector3> vertices = new List<Vector3>();
+        curve = true;
+        int count = 0;
+        controle1 = true;
+        while (controle1)
         {
-            if (curve == 1)
+            if (curve)
             {
-                dx = -0.05f;
+                List<Vector3> list = pointsMathCurveDy(x, y, dy, mass);
+                for (int i = 0; i < list.Count; i++)
+                {
+                    vertices.Add(list[i]);
+                }
+                Vector3 point2 = vertices[vertices.Count - 1];
+                Vector3 point1 = vertices[vertices.Count - 2];
+                x = point2.x;
+                y = point2.y;
+                if(point1.x > point2.x && dx > 0)
+                    dx = -dx;
+                else if (point1.x < point2.x && dx < 0)
+                    dx = -dx;
             }
             else
             {
-                dy = 0.05f;
-            }
-
-            if (curve == 1)
-            {
-                control2 = 2;
-                while (control2 == 2)
+                List<Vector3> list = pointsMathCurveDx(x, y, dx, mass);
+                for (int i = 0; i < list.Count; i++)
                 {
-
-                    x12 = x + 0.5f * dx;
-                    y12 = y - 0.5f * dx * derivatives.derivativeX(x, y) / derivatives.derivativeY(x, y);
-                    x = x + dx;
-
-                    dy = Mathf.Abs(-dx * derivatives.derivativeX(x12, y12) / derivatives.derivativeY(x12, y12));
-
-                    V = potential.getPotential(mass, x, y);
-
-                    if (Mathf.Abs(dx) >= dy)
-                    {
-                        control2 = 2;
-                    }
-                    else
-                    {
-                        control2 = 3;
-                        break;
-                    }
-
-                    y = y - dx * derivatives.derivativeX(x12, y12) / derivatives.derivativeY(x12, y12);
-
-                    y = y - (potential.getPotential(mass, x, y) - k) / derivatives.derivativeY(x, y);
-
-                    dy = Mathf.Abs(-dx * derivatives.derivativeX(x12, y12) / derivatives.derivativeY(x12, y12));
-
-					Debug.Log(x + " " + y);
+                    vertices.Add(list[i]);
                 }
-            }
-            else
-            {
-                control3 = 3;
-                while (control3 == 3)
-                {
-                    y12 = y + 0.5f * dy;
-                    x12 = x - 0.5f * dy * derivatives.derivativeX(x, y) / derivatives.derivativeY(x, y);
-
-                    dx = Mathf.Abs(-dy * derivatives.derivativeX(x12, y12) / derivatives.derivativeY(x12, y12));
-
-                    V = potential.getPotential(mass, x, y);
-
-                    if (Mathf.Abs(dy) >= dx)
-                    {
-                        control3 = 3;
-                    }
-                    else
-                    {
-                        control3 = 2;
-                        break;
-                    }
-
-                    y = y + dy;
-                    x = x - dy * derivatives.derivativeX(x12, y12) / derivatives.derivativeY(x12, y12);
-
-                    x = x - (potential.getPotential(mass, x, y) - k) / derivatives.derivativeX(x, y);
-
-					Debug.Log(x + " " + y);
-                }
-            }
-
-            control1 = 1;
-
-            if (control1 == 1)
-            {
-                if (curve == 1)
-                {
-                    curve = 2;
-                }
-                else
-                {
-                    curve = 1;
-                }
+                Vector3 point2 = vertices[vertices.Count - 1];
+                Vector3 point1 = vertices[vertices.Count - 2];
+                x = point2.x;
+                y = point2.y;
+                if (point1.y > point2.y && dy > 0)
+                    dy = -dy;
+                else if (point1.y < point2.y && dy < 0)
+                    dy = -dy;
             }
             count++;
+            curve = !curve;
         }
-    }*/
+        return vertices;
+    }
+
+    private List<Vector3> pointsMathCurveDx(float x, float y, float dx, float mass)
+    {
+        List<Vector3> vertices = new List<Vector3>();
+
+        float dy = 0;
+        float V = 0;
+        float x12 = 0;
+        float y12 = 0;
+        float lastDistance = 0;
+        bool near = false;
+        Vector3 startPoint = new Vector3(x, y);
+
+        float k = potential.getPotential(x, y, mass);
+
+        bool controle2 = true;
+        while (controle2)
+        {
+            x12 = x + 0.5f * dx;
+            y12 = y - 0.5f * dx * derivatives.derivativeX(x, y, mass) / derivatives.derivativeY(x, y, mass);
+            x = x + dx;
+
+            dy = Mathf.Abs(-dx * derivatives.derivativeX(x12, y12, mass) / derivatives.derivativeY(x12, y12, mass));
+
+            V = potential.getPotential(x, y, mass);
+
+            //Debug.Log("(" + x + ", " + y + ", " + V + ", " + dx + ", " + dy + ")");
+
+            if (Mathf.Abs(dx) >= dy)
+                controle2 = true;
+            else
+            {
+                controle2 = false;
+                break;
+            }
+
+            y = y - dx * derivatives.derivativeX(x12, y12, mass) / derivatives.derivativeY(x12, y12, mass);
+
+            y = y - (potential.getPotential(x, y, mass) - k) / derivatives.derivativeY(x, y, mass);
+
+            dy = Mathf.Abs(-dx * derivatives.derivativeX(x12, y12, mass) / derivatives.derivativeY(x12, y12, mass));
+
+            //Stop the calculo if y minor than zero
+            if (y < 0)
+            {
+                controle1 = false;
+                break;
+            }
+
+            //For points that don't get negative this looks if the point is near the initial point;
+            //Begin
+            float distance = Vector3.Distance(new Vector3(x, y), startPoint);
+            if (distance < lastDistance)
+            {
+                near = true;
+            }
+            if (distance > lastDistance && near)
+            {
+                controle1 = false;
+                break;
+            }
+            lastDistance = distance;
+            //End
+
+            vertices.Add(new Vector3(x, y));
+            Debug.Log("(x,y)=(" + x + "," + y + ")");
+        }
+        points = false;
+        Debug.Log(vertices.Count);
+        return vertices;
+    }
+
+    private List<Vector3> pointsMathCurveDy(float x, float y, float dy, float mass)
+    {
+        List<Vector3> vertices = new List<Vector3>();
+
+        float dx = 0;
+        float V = 0;
+        float x12 = 0;
+        float y12 = 0;
+        float lastDistance = 0;
+        bool near = false;
+        Vector3 startPoint = new Vector3(x, y);
+
+        float k = potential.getPotential(x, y, mass);
+
+        bool controle3 = true;
+        while (controle3)
+        {
+            y12 = y + 0.5f * dy;
+            x12 = x - 0.5f * dy * derivatives.derivativeY(x, y, mass) / derivatives.derivativeX(x, y, mass);
+
+            dx = Mathf.Abs(-dy * derivatives.derivativeY(x12, y12, mass) / derivatives.derivativeX(x12, y12, mass));
+
+            V = potential.getPotential(x, y, mass);
+
+            //Debug.Log("(x,y,V,dx,dy)=(" + x + ", " + y + ", " + V + ", " + dx + ", " + dy + ")");
+
+            if (Mathf.Abs(dy) >= dx)
+                controle3 = true;
+            else
+            {
+                controle3 = false;
+                break;
+            }
+            y = y + dy;
+            x = x - dy * derivatives.derivativeY(x12, y12, mass) / derivatives.derivativeX(x12, y12, mass);
+
+            x = x - ((potential.getPotential(x, y, mass) - k) / derivatives.derivativeX(x, y, mass));
+
+            //Stop the calculo if y minor than zero
+            if (y < 0)
+            {
+                controle1 = false;
+                break;
+            }
+
+            //For points that don't get negative this looks if the point is near the initial point;
+            //Begin
+            float distance = Vector3.Distance(new Vector3(x, y), startPoint);
+            if (distance < lastDistance)
+            {
+                near = true;
+            }
+            if (distance > lastDistance && near)
+            {
+                controle1 = false;
+                break;
+            }
+            lastDistance = distance;
+            //End
+
+            vertices.Add(new Vector3(x, y));
+            Debug.Log("(x,y)=(" + x + "," + y + ")");
+        }
+        points = false;
+        Debug.Log(vertices.Count);
+        return vertices;
+    }
 }

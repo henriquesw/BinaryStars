@@ -7,26 +7,28 @@ public class MeshGenerator : MonoBehaviour {
 	private MeshFilter[] meshFilter;
 	private Mesh mesh;
 	private List<Vector3> points;
+    private Equation equation;
+    private LineRenderer line;
 
-	public bool enableGeneration;
-	public float circleRay;
-	public float quantidadeDePontos;
-
+    public bool enableGeneration;
+    public float mass;
+	
 	// Use this for initialization
 	void Start () {
 		meshFilter = GetComponents<MeshFilter> ();
-		mesh = new Mesh ();
-		points = new List<Vector3> ();
-		quantidadeDePontos = (2*circleRay)/0.01f;
+        equation = GetComponent<Equation>();
 		enableGeneration = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (enableGeneration) {
-			points = circleGenerator ();
-			meshFilter[0].mesh = generateMesh (points); 
-			enableGeneration = false;
+            mesh = new Mesh();
+            points = equation.pointsMath(1.05f, 0f, -0.05f, 0.05f, mass);
+            meshFilter[0].mesh.Clear(true);
+            meshFilter[0].mesh = generateMesh (points);
+            enableGeneration = false;
+            Debug.Log(points.Count);
 		}
 	}
 
@@ -34,8 +36,10 @@ public class MeshGenerator : MonoBehaviour {
 
 		int size = points.Count;
 		List<Vector3> vertices = new List<Vector3> ();
-		//Remove ultimo ponto para ser adicionado no final
-		Vector3 lastPoint = points[points.Count-1];
+        List<int> triangles = new List<int>();
+
+        //Remove ultimo ponto para ser adicionado no final
+        Vector3 lastPoint = points[points.Count-1];
 		points.RemoveAt (points.Count-1);
 
 		vertices = points;
@@ -59,7 +63,6 @@ public class MeshGenerator : MonoBehaviour {
 
 		mesh.vertices = vertices.ToArray ();
 
-		List<int> triangles = new List<int> ();
 		int jump = (size - 2);
 		//Face interna
 		//Ponta da mesh
@@ -115,20 +118,4 @@ public class MeshGenerator : MonoBehaviour {
 
 		return mesh;
 	}
-
-	public List<Vector3> circleGenerator () {
-		
-		float x;
-		float y;
-		float jump = (2 * circleRay) / quantidadeDePontos;
-		List<Vector3> points = new List<Vector3> ();
-		//Gera pontos
-		for (x = -circleRay; x <= circleRay; x+=jump) {
-			y = Mathf.Sqrt (Mathf.Pow (circleRay, 2) - Mathf.Pow (x, 2));
-			points.Add (new Vector3(x, y, 0));
-		}
-		Debug.Log ("Quantidade pontos: " + points.Count);
-		return points;
-	}
-
 }

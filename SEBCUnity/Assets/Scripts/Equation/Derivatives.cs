@@ -4,14 +4,7 @@ using UnityEngine;
 
 public class Derivatives {
 
-	private float mass;
-
-	public Derivatives(float mass)
-    {
-		this.mass = mass;
-	}
-
-	public float derivativeX (float x, float y)
+	public float derivativeX (float x, float y, float mass)
     {	
 		float radius1 = Mathf.Sqrt (Mathf.Pow ((x - mass), 2) + Mathf.Pow (y, 2));
 		float radius2 = Mathf.Sqrt (Mathf.Pow ((x + 1 - mass), 2) + Mathf.Pow (y, 2));
@@ -21,7 +14,7 @@ public class Derivatives {
 		return derivative_x;
 	}
 
-	public float derivativeY (float x, float y)
+	public float derivativeY (float x, float y, float mass)
     {
         float radius1 = Mathf.Sqrt (Mathf.Pow((x - mass), 2) + Mathf.Pow(y, 2));
         float radius2 = Mathf.Sqrt (Mathf.Pow((x + 1 - mass), 2) + Mathf.Pow(y, 2));

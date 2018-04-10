@@ -2402,7 +2402,6 @@ GameObject:
   - component: {fileID: 471125375}
   - component: {fileID: 471125374}
   - component: {fileID: 471125373}
-  - component: {fileID: 471125372}
   m_Layer: 5
   m_Name: EmailWindow
   m_TagString: UI
@@ -2410,18 +2409,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &471125372
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114879865344780550, guid: b696df152e187d9478a77541d7e0b71f,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 471125371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81d7f1736d70b684aa46cf340b7d8ee3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &471125373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2506,12 +2493,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1f37b986aed46341a567800d87ccda1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xStart: 0.8872935
-  yStart: 0.35
+  xStart: 1.05
+  yStart: 0
   mass: 0.4
-  curve: 1
   dxStart: -0.05
   dyStart: 0.05
+  curve: 1
 --- !u!4 &504038695
 Transform:
   m_ObjectHideFlags: 0

@@ -9,14 +9,9 @@ public class CameraBehaviour : MonoBehaviour {
 	public Slider slider;
 
     private float currentAngle;
-	private float rotationSpeed = 10f;
-    private float rotationSpeedY = 0.5f;
     private Vector2 rotation;
 
     private float horizontalMove = 1f;
-    private float verticalMove = 1f;
-
-    private bool UITouched = false;
 
     // Use this for initialization
     void Start () {

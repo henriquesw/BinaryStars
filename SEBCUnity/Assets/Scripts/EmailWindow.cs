@@ -87,6 +87,7 @@ public class EmailWindow : MonoBehaviour
             {
                 // AVISAR USUÁRIO QUE DEU ERRADO E PQ DEU ERRADO
                 // PROBLEMAS DE AUTENTICAÇÃO
+                Debug.Log(se);
             }
             //GameObject.Find("EventSystem").GetComponent<ProgressDialog>().progress = 10;
             //yield return null;
